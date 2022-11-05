@@ -107,3 +107,30 @@
 #button {
     padding-bottom: 1.5rem;
 }
+
+.form-control  {
+    width: 80%;
+    box-sizing: border-box;
+    border: none;
+    font-size: 1.3rem;
+    padding-left: 1.5rem;
+    color: #7a777b;
+    padding-top: 0.5rem;
+    box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+    transition: box-shadow 0.2s ease-in;
+}
+
+.form-control :focus {
+    box-shadow: inset 0px -3px 0px 0px rgba(34, 193, 195, 0.7);
+    outline: none;
+}
+
+.form-control ::-webkit-input-placeholder {
+    opacity: 1;
+    transition: opacity 0.25s ease-out;
+}
+
+.form-control :hover::-webkit-input-placeholder,
+.form-control :focus::-webkit-input-placeholder {
+    opacity: 0;
+}
