@@ -1,4 +1,5 @@
 import React from 'react'
+import NavigationBar from './navBar';
 
 const Register = () => {
     //login method
@@ -6,7 +7,9 @@ const Register = () => {
         e.preventDefault();
 
     }
-    return (
+    return (<div>
+        <NavigationBar />
+
         <div className='login-body'>
             <div id="registerform">
                 <h2 id="registerheaderTitle">Create User Accounts</h2>
@@ -69,6 +72,7 @@ const Register = () => {
                 </form>
             </div>
         </div>
+    </div>
     )
 }
 

@@ -71,51 +71,31 @@ export const uploadFile = () => {
     return (
         <div className='template-content-container'>
             <div className='create-template-form'>
-                <div className='d-flex flex-row justify-content-center text-center bg-danger text-white'>
-                    <h3 htmlFor="group">File Upload</h3>
-                </div>
+                <h3 className='text-center' htmlFor="group">Upload Your File Here</h3>
+
                 <hr></hr>
                 <br></br>
-                <div class="d-flex flex-row">
-                    <div class="p-2">Flex item 1</div>
-                    <div class="p-2">Flex item 2</div>
-                    <div class="p-2">Flex item 3</div>
-                </div>
-                <div className="d-flex flex-row">
-                    <Form.Group className="mb-3 mt-4" controlId="formBasicEmail">
-                        <Row>
-
-                            <Col>
-
-                                <div className='col-4'>
-                                    <DropzoneArea sendData={sendData} sendProgress={sendProgress} />
-                                    {fileName.value ? fileName.value.substring(0, 30) + "..." : ''}
-                                    {fileName.isError && <small className='text-danger'>{fileName.error}</small>}
-                                </div>
-                                <div className='col-6'>
-                                    <div>
-                                        {!fileName.value && state ? <ProgressBar now={loadingProgress} /> : ""}
-                                    </div>
-
-                                </div >
-                            </Col>
-
-                        </Row>
-                    </Form.Group>
-
-                    <br></br>
-
-                    <button className="btn btn-primary">
-                        test
-                    </button>
-
-                    <div className="col py-3 text-center">
-                        <div id="button" class="row">
-                            <button onClick={(e) => { onSubmit(e) }}>
-                                Upload
-                            </button>
-                        </div>
+                <br></br>
+                <div className="d-flex flex-column  text-center">
+                    <div >
+                        <DropzoneArea sendData={sendData} sendProgress={sendProgress} />
+                        {fileName.value ? fileName.value.substring(0, 30) + "..." : ''}
+                        {fileName.isError && <small className='text-danger'>{fileName.error}</small>}
                     </div>
+                    <div className='mt-2'>
+                        {!fileName.value && state ? <ProgressBar now={loadingProgress} /> : null}
+                    </div >
+                </div>
+                <br>
+                </br>
+
+                <div className="col py-3 text-center">
+                    <div id="button" class="row">
+                        <button onClick={(e) => { onSubmit(e) }}>
+                            Upload
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
