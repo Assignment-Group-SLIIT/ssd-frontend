@@ -36,6 +36,17 @@
     border-radius: 25px;
 }
 
+#messageform {
+    max-width: 800px;
+    min-width: 300px;
+    max-height: 700px;
+    width: 40%;
+    height: 60%;
+    margin: 100px auto;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+}
+
 #headerTitle {
     text-align: center;
     font-family: 'open sans', sans-serif;
@@ -77,6 +88,46 @@
 .row input:hover::-webkit-input-placeholder,
 .row input:focus::-webkit-input-placeholder {
     opacity: 0;
+}
+
+.row textarea {
+    width: 80%;
+    height: 100% !important;
+    box-sizing: border-box;
+    border: none;
+    font-size: 1.3rem;
+    padding-left: 1.5rem;
+    padding-top: 0.5rem;
+    box-shadow: inset 0px -3px 0px 0px rgba(187, 187, 187, 0.2);
+    transition: box-shadow 0.2s ease-in;
+}
+
+.row textarea:focus {
+    box-shadow: inset 0px -3px 0px 0px rgba(34, 193, 195, 0.7);
+    outline: none;
+}
+
+.row textarea::-webkit-input-placeholder {
+    opacity: 1;
+    transition: opacity 0.25s ease-out;
+}
+
+.row textarea:hover::-webkit-input-placeholder,
+.row textarea:focus::-webkit-input-placeholder {
+    opacity: 0;
+}
+
+textarea::-webkit-scrollbar {
+    width: 1em;
+}
+
+textarea::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: rgba(34, 152, 195, 0.7);
+    outline: 1px solid rgba(34, 193, 195, 0.7);
 }
 
 .row label {
