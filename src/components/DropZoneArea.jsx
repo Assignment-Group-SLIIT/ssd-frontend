@@ -43,7 +43,7 @@ function DropzoneArea(props) {
 
     const handleSubmit = (e) => {
         // e.preventDefault()
-        console
+       
         const file = files[0];
 
         if (!file) return;
