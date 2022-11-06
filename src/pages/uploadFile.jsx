@@ -5,7 +5,7 @@ import toastNotification from '../components/toastNotification';
 import '../styles/upload.styles.scss'
 
 
-export const uploadFile = () => {
+export const UploadFile = () => {
     const [fileName, setFileName] = useState({ value: "", error: "Please select a file", isError: false });
     const [loadingProgress, setLoadingProgress] = useState(10)
     const [state, setState] = useState(false)

@@ -47,6 +47,17 @@
     border-radius: 25px;
 }
 
+#fileuploadform {
+    max-width: 500px;
+    min-width: 300px;
+    max-height: 900px;
+    width: 30%;
+    height: 70%;
+    margin: 100px auto;
+    background-color: #FFFFFF;
+    border-radius: 25px;
+}
+
 
 #messageform {
     max-width: 800px;
@@ -68,6 +79,14 @@
 }
 
 #registerheaderTitle {
+    text-align: center;
+    font-family: 'open sans', sans-serif;
+    padding: 1rem 0;
+    margin: 0;
+    font-size: 2rem;
+}
+
+#fileuploadheaderTitle {
     text-align: center;
     font-family: 'open sans', sans-serif;
     padding: 1rem 0;
@@ -205,3 +224,4 @@ textarea::-webkit-scrollbar-thumb {
 .form-control :focus::-webkit-input-placeholder {
     opacity: 0;
 }
+
