@@ -7,6 +7,7 @@ import CreateMessage from '../pages/createMsg'
 // import { Navigationbar } from '../components/Navigationbar'
 // import { CreateTemplate } from '../pages/admin/CreateTemplate'
 import PrivateRoute from '../utils/PrivateRoute'
+import FileUpload from '../pages/FileUpload'
 
 export const RoutesComponent = () => {
     return (
@@ -19,6 +20,7 @@ export const RoutesComponent = () => {
                     <Route exact path='/login' element={<Login />} />
                     <Route exact path='/register' element={<Register />} />
                     <Route exact path='/message' element={<CreateMessage />} />
+                    <Route exact path='/file' element={<FileUpload />} />
                 </Routes>
                 {/* <Footer /> */}
             </Router>

@@ -1,11 +1,41 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { registerUser } from '../services/user.service';
 
 const Register = () => {
+
+    const [name, setName] = useState("");
+    const [phone, setPhone] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [type, setType] = useState("");
+
     //login method
     const signup = (e) => {
         e.preventDefault();
+        console.log("data coming " , name)
+        const userPayload = {
+            name,
+            phone,
+            email,
+            password,
+            type
+        }
 
-    }
+        if(password === confirmPassword){
+            registerUser(userPayload).then((response) => {
+                console.log("data coming " , userPayload)
+               
+                    alert("success")
+               
+            }).catch((err) => {
+                console.log("error while staff signup", err.error)
+            })
+        } else {
+            alert("password not matching");
+        }
+        }
+
     return (
         <div className='login-body'>
             <div id="registerform">
@@ -15,14 +45,14 @@ const Register = () => {
                         <label>Username</label>
                         <input type="text"
                             placeholder="Enter your username"
-                        //onChange={e => { setUserType(e.target.value); }} 
+                        onChange={e => { setName(e.target.value); }} 
                         />
                     </div>
                     <div class="row">
                         <label>Email</label>
                         <input type="text"
                             placeholder="Enter your email"
-                        //onChange={e => { setEmail(e.target.value); }}
+                        onChange={e => { setEmail(e.target.value); }}
                         />
                     </div>
                     <div class="row">
@@ -30,7 +60,7 @@ const Register = () => {
                         <input
                             type="number"
                             placeholder="Enter your phone number"
-                        //onChange={e => { setPhoneNumberType(e.target.value); }}
+                        onChange={e => { setPhone(e.target.value); }}
                         />
                     </div>
                     <div class="row">
@@ -38,7 +68,7 @@ const Register = () => {
                         <select
                             id="userType"
                             className="form-control "
-                            // onChange={e => { setUserType(e.target.value); }}
+                            onChange={e => { setType(e.target.value); }}
                             required>
                             <option  >Select User Type</option>
                             <option id="type1" value="Worker" >Worker</option>
@@ -50,7 +80,7 @@ const Register = () => {
                         <input
                             type="password"
                             placeholder="Enter your password"
-                        //onChange={e => { setPassword(e.target.value); }}
+                        onChange={e => { setPassword(e.target.value); }}
                         />
                     </div>
                     <div class="row">
@@ -58,7 +88,7 @@ const Register = () => {
                         <input
                             type="password"
                             placeholder="Confirm your password"
-                        //onChange={e => { setConfirmPassword(e.target.value); }}
+                        onChange={e => { setConfirmPassword(e.target.value); }}
                         />
                     </div>
                     <div id="button" class="row">
