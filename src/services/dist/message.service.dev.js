@@ -3,114 +3,112 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getAllUsers = exports.loginUser = exports.registerUser = void 0;
-
-var _token = require("../utils/token");
+exports.getAllMessagesofUser = exports.getAllMessages = exports.createMessage = void 0;
 
 var _API = _interopRequireDefault(require("./API"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var registerUser = function registerUser(userPayload) {
+var createMessage = function createMessage(userPayload) {
   var response;
-  return regeneratorRuntime.async(function registerUser$(_context) {
+  return regeneratorRuntime.async(function createMessage$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _context.prev = 0;
-          _context.next = 3;
-          return regeneratorRuntime.awrap(_API.default.post("users/register", userPayload));
+          console.log("userPayload ", userPayload);
+          _context.prev = 1;
+          _context.next = 4;
+          return regeneratorRuntime.awrap(_API.default.post("messages/", userPayload));
 
-        case 3:
+        case 4:
           response = _context.sent;
 
           if (!(response.status === 201)) {
-            _context.next = 6;
+            _context.next = 7;
             break;
           }
 
           return _context.abrupt("return", {
-            ok: true,
-            data: response.data
-          });
-
-        case 6:
-          _context.next = 11;
-          break;
-
-        case 8:
-          _context.prev = 8;
-          _context.t0 = _context["catch"](0);
-          return _context.abrupt("return", {
-            ok: false,
-            err: _context.t0.data
-          });
-
-        case 11:
-        case "end":
-          return _context.stop();
-      }
-    }
-  }, null, null, [[0, 8]]);
-};
-
-exports.registerUser = registerUser;
-
-var loginUser = function loginUser(user) {
-  var response;
-  return regeneratorRuntime.async(function loginUser$(_context2) {
-    while (1) {
-      switch (_context2.prev = _context2.next) {
-        case 0:
-          _context2.prev = 0;
-          _context2.next = 3;
-          return regeneratorRuntime.awrap(_API.default.post("users/login", user));
-
-        case 3:
-          response = _context2.sent;
-
-          if (!(response.status === 200)) {
-            _context2.next = 7;
-            break;
-          }
-
-          (0, _token.setUserSession)(response.data.token, response.data);
-          return _context2.abrupt("return", {
             ok: true,
             data: response.data
           });
 
         case 7:
-          _context2.next = 12;
+          _context.next = 12;
           break;
 
         case 9:
-          _context2.prev = 9;
+          _context.prev = 9;
+          _context.t0 = _context["catch"](1);
+          return _context.abrupt("return", {
+            ok: false,
+            err: _context.t0.data
+          });
+
+        case 12:
+        case "end":
+          return _context.stop();
+      }
+    }
+  }, null, null, [[1, 9]]);
+};
+
+exports.createMessage = createMessage;
+
+var getAllMessages = function getAllMessages() {
+  var response;
+  return regeneratorRuntime.async(function getAllMessages$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          _context2.next = 3;
+          return regeneratorRuntime.awrap(_API.default.get("messages/"));
+
+        case 3:
+          response = _context2.sent;
+
+          if (!(response.status === 200)) {
+            _context2.next = 6;
+            break;
+          }
+
+          return _context2.abrupt("return", {
+            ok: true,
+            data: response.data
+          });
+
+        case 6:
+          _context2.next = 11;
+          break;
+
+        case 8:
+          _context2.prev = 8;
           _context2.t0 = _context2["catch"](0);
           return _context2.abrupt("return", {
             ok: false,
             err: _context2.t0.data
           });
 
-        case 12:
+        case 11:
         case "end":
           return _context2.stop();
       }
     }
-  }, null, null, [[0, 9]]);
+  }, null, null, [[0, 8]]);
 };
 
-exports.loginUser = loginUser;
+exports.getAllMessages = getAllMessages;
 
-var getAllUsers = function getAllUsers() {
+var getAllMessagesofUser = function getAllMessagesofUser(email) {
   var response;
-  return regeneratorRuntime.async(function getAllUsers$(_context3) {
+  return regeneratorRuntime.async(function getAllMessagesofUser$(_context3) {
     while (1) {
       switch (_context3.prev = _context3.next) {
         case 0:
           _context3.prev = 0;
           _context3.next = 3;
-          return regeneratorRuntime.awrap(_API.default.get("users/"));
+          return regeneratorRuntime.awrap(_API.default.get("messages/".concat(email)));
 
         case 3:
           response = _context3.sent;
@@ -145,5 +143,5 @@ var getAllUsers = function getAllUsers() {
   }, null, null, [[0, 8]]);
 };
 
-exports.getAllUsers = getAllUsers;
-//# sourceMappingURL=user.service.dev.js.map
+exports.getAllMessagesofUser = getAllMessagesofUser;
+//# sourceMappingURL=message.service.dev.js.map

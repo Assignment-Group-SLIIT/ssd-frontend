@@ -1,7 +1,7 @@
 import API from "./API";
 
 export const createMessage = async (userPayload) => {
-
+console.log("userPayload " , userPayload)
     try {
         const response = await API.post("messages/", userPayload);
         if (response.status === 201) {
