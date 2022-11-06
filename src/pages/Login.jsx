@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { loginUser } from '../services/user.service';
+import NavigationBar from './navBar';
 
 export const Login = () => {
 

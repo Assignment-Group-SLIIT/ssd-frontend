@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { registerUser } from '../services/user.service';
+import NavigationBar from './navBar';
 
 const Register = () => {
 
@@ -24,7 +25,7 @@ const Register = () => {
 
         if(password === confirmPassword){
             registerUser(userPayload).then((response) => {
-                console.log("data coming " , userPayload)
+                console.log("data coming " , response)
                
                     alert("success")
                
@@ -36,7 +37,10 @@ const Register = () => {
         }
         }
 
-    return (
+    
+    return (<div>
+        <NavigationBar />
+
         <div className='login-body'>
             <div id="registerform">
                 <h2 id="registerheaderTitle">Create User Accounts</h2>
@@ -99,6 +103,7 @@ const Register = () => {
                 </form>
             </div>
         </div>
+    </div>
     )
 }
 

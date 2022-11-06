@@ -1,21 +1,11 @@
 import React, { useState, Component } from 'react'
-// import { DropzoneArea } from 'material-ui-dropzone'
 import { DropzoneDialog } from 'material-ui-dropzone'
-import Button from '@material-ui/core/Button';
 import { storage } from '../firebase';
 import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import toastNotification from './toastNotification';
 
 
 function DropzoneArea(props) {
-    // const [files, setFiles] = useState([])
-
-    // return (
-    //     <DropzoneArea
-    //         onChange={(e) => { setFiles(e.target.value) }}
-    //     />
-    // )
-
     const [files, setFiles] = useState([])
     const [open, setOpen] = useState(false)
 
@@ -43,7 +33,7 @@ function DropzoneArea(props) {
 
     const handleSubmit = (e) => {
         // e.preventDefault()
-        console
+
         const file = files[0];
 
         if (!file) return;
@@ -65,7 +55,7 @@ function DropzoneArea(props) {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log("url>>>", downloadURL);
+                    // console.log("url>>>", downloadURL);
                     sendData(downloadURL)
                     // toastNotification("File uploaded successfully!", "success")
 
@@ -79,12 +69,10 @@ function DropzoneArea(props) {
 
     return (
         <div>
-
-            {/* <RippleButton className="ripple-button" text="Upload" onClick={(e) => { handleOpen(e) }}></RippleButton> */}
-            <Button variant="outlined" onClick={(e) => { handleOpen(e) }}>
-                Upload &nbsp;
+            <button className="btn-primary p-1 " onClick={(e) => { handleOpen(e) }}>
+                select your file &nbsp;
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather feather-upload"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
-            </Button>
+            </button>
 
             <DropzoneDialog
                 open={open}
