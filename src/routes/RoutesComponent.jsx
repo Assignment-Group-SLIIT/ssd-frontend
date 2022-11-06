@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { Login } from '../pages/Login'
 import Register from '../pages/Register'
 import CreateMessage from '../pages/createMsg'
-import { uploadFile as UploadFile } from '../pages/uploadFile'
+import { UploadFile as UploadFile } from '../pages/uploadFile'
 
 // import Footer from '../components/Footer'
 // import { Navigationbar } from '../components/Navigationbar'
