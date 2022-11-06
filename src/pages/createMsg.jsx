@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import NavigationBar from './navBar'
 import { createMessage } from '../services/message.service';
 import toastNotification from "../components/toastNotification"
 
@@ -44,7 +43,6 @@ const CreateMessage = () => {
 
     return (
         <div>
-            <NavigationBar />
             <div className='login-body'>
                 <div id="messageform">
                     <h2 id="headerTitle">Create Your Message</h2>
