@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { loginUser } from '../services/user.service';
 import NavigationBar from './navBar';
+import { useNavigate } from 'react-router-dom';
+import toastNotification from "../components/toastNotification"
 
 export const Login = () => {
+
+    const navigate = useNavigate();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -10,6 +14,7 @@ export const Login = () => {
     //login method
     const signin = (e) => {
         e.preventDefault();
+
         const payload = {
             email,
             password
@@ -17,9 +22,12 @@ export const Login = () => {
 
         loginUser(payload).then((res) => {
             console.log("response" , res)
+            res.ok ? toastNotification("Success!", "success") : toastNotification("Email or Password is incorrect!", "error")
+
             const user = JSON.parse(sessionStorage.getItem("user"))
-            if(user.type === "Worker"){
+            if(user.type === "worker"){
                 sessionStorage.setItem("type" , "Worker")
+                navigate("/message");
             }else{
                 sessionStorage.setItem("type" , "Manager")
             }
