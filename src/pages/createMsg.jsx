@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import NavigationBar from './navBar'
 import { createMessage } from '../services/message.service';
 import toastNotification from "../components/toastNotification"
 import { useEffect } from 'react';
@@ -20,16 +19,16 @@ const CreateMessage = () => {
         const user = JSON.parse(sessionStorage.getItem("user"))
 
         const payload = {
-            email:user.email,
+            email: user.email,
             description
         }
 
         createMessage(payload).then((res) => {
-            console.log("response" , res)
+            console.log("response", res)
             res.ok ? toastNotification("Success!", "success") : toastNotification("Email or Message is incorrect!", "error")
 
 
-          
+
         }).catch((err) => {
             console.log("error while sign in >>", err.ok)
 
@@ -39,7 +38,6 @@ const CreateMessage = () => {
 
     return (
         <div>
-            <NavigationBar />
             <div className='login-body'>
                 <div id="messageform">
                     <h2 id="headerTitle">Create Your Message</h2>
@@ -47,9 +45,9 @@ const CreateMessage = () => {
                         <div class="row">
                             <label>Message</label>
                             <textarea
-                                class="form-control" 
+                                class="form-control"
                                 onChange={e => { setDescription(e.target.value); }}
-                                id="exampleFormControlTextarea1" 
+                                id="exampleFormControlTextarea1"
                                 rows="7"></textarea>
                         </div>
 
