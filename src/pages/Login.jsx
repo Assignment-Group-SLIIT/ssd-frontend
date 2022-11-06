@@ -28,6 +28,9 @@ export const Login = () => {
             if (user.type === "Worker") {
                 sessionStorage.setItem("type", "Worker")
                 navigate("/message");
+            } else if (user.type === "Admin") {
+                sessionStorage.setItem("type", "Admin")
+                navigate("/register");
             } else {
                 sessionStorage.setItem("type", "Manager")
             }
