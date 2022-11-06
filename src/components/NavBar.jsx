@@ -1,7 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { removeUserSession } from '../utils/token'
+
 
 const NavigationBar = () => {
+
+    const logout = () => {
+        removeUserSession();
+        window.location.replace('/login')
+    }
+
+
     return (
         <div>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -14,7 +23,7 @@ const NavigationBar = () => {
                         <Link to="/register"><a class="nav-item nav-link active" href="#">User Registartion<span class="sr-only">(current)</span></a></Link>
                         <Link to=""><a class="nav-item nav-link active" href="#">File Upload</a></Link>
                         <Link to="/message"><a class="nav-item nav-link active" href="#">Save Message</a></Link>
-                        <a class="nav-item nav-link active" href="#">Logout</a>
+                        <a class="nav-item nav-link active" href="#" onClick={() => logout()}>Logout</a>
                     </div>
                 </div>
             </nav>
