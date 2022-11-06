@@ -13,7 +13,7 @@ instance.interceptors.request.use(
         const token = getToken();
 
         const headers = {
-            Authorization: 'Bearer' + token,
+            Authorization: 'Bearer ' + token,
             'Access-Control-Allow-Origin': "*",
             'Access-Control-Allow-Headers': "Content-Type",
         }

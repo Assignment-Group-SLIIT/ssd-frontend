@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { loginUser } from '../services/user.service';
-import NavigationBar from './navBar';
 import { useNavigate } from 'react-router-dom';
 import toastNotification from "../components/toastNotification"
 
