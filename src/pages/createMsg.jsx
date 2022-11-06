@@ -1,12 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import NavigationBar from './navBar'
+import { createMessage } from '../services/message.service';
+import toastNotification from "../components/toastNotification"
 
 const CreateMessage = () => {
     const [msg, setMsg] = useState({ value: "", error: "This field cannot be empty", isError: false });
 
-    const createMessage = () => {
-        //to validate the user input
 
+    const sendMessage = (e) => {
+        e.preventDefault();
+
+        const user = JSON.parse(sessionStorage.getItem("user"))
+        console.log("email>>", user)
+        const payload = {
+            email: user.email,
+            description: msg.value
+        }
+
+        createMessage(payload).then((res) => {
+            console.log("response", res)
+            res.ok ? toastNotification("Success!", "success") : toastNotification("Email or Message is incorrect!", "error")
+
+
+
+        }).catch((err) => {
+            console.log("error while sign in >>", err.ok)
+
+        })
 
     }
 
@@ -15,11 +35,11 @@ const CreateMessage = () => {
         const { value } = e.target;
         const re = /^[A-Z@.a-z0-9]+$/;
         if (value === "" || re.test(value)) {
-            setName({ ...msg, value: value })
+            setMsg({ ...msg, value: value })
         }
     }
     useEffect(() => {
-        msg.value === "" ? setName({ ...msg, isError: true }) : setName({ ...msg, isError: false });
+        msg.value === "" ? setMsg({ ...msg, isError: true }) : setMsg({ ...msg, isError: false });
     }, [msg.value])
 
     return (
@@ -38,7 +58,7 @@ const CreateMessage = () => {
                         </div>
 
                         <div id="button" class="row">
-                            <button onClick={(e) => { createMessage(e) }}>
+                            <button onClick={(e) => { sendMessage(e) }}>
                                 Submit
                             </button>
                         </div>

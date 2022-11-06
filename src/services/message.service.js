@@ -1,9 +1,10 @@
 import API from "./API";
 
 export const createMessage = async (userPayload) => {
-
+    console.log("userPayload ", userPayload)
     try {
         const response = await API.post("messages/", userPayload);
+        console.log("res>>", response)
         if (response.status === 201) {
             return {
                 ok: true,
