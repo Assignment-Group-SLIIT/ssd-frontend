@@ -21,15 +21,15 @@ export const Login = () => {
         }
 
         loginUser(payload).then((res) => {
-            console.log("response" , res)
+            console.log("response", res)
             res.ok ? toastNotification("Success!", "success") : toastNotification("Email or Password is incorrect!", "error")
 
             const user = JSON.parse(sessionStorage.getItem("user"))
-            if(user.type === "worker"){
-                sessionStorage.setItem("type" , "Worker")
+            if (user.type === "Worker") {
+                sessionStorage.setItem("type", "Worker")
                 navigate("/message");
-            }else{
-                sessionStorage.setItem("type" , "Manager")
+            } else {
+                sessionStorage.setItem("type", "Manager")
             }
         }).catch((err) => {
             console.log("error while sign in >>", err.ok)
@@ -44,19 +44,19 @@ export const Login = () => {
                 <form>
                     <div class="row">
                         <label>Email</label>
-                        <input 
-                            type="text" 
-                            placeholder="Enter your email" 
+                        <input
+                            type="text"
+                            placeholder="Enter your email"
                             onChange={e => { setEmail(e.target.value); }}
-                            />
+                        />
                     </div>
                     <div class="row">
                         <label>Password</label>
-                        <input 
-                            type="password" 
-                            placeholder="Enter your password" 
+                        <input
+                            type="password"
+                            placeholder="Enter your password"
                             onChange={e => { setPassword(e.target.value); }}
-                            />
+                        />
                     </div>
                     <div id="button" class="row">
                         <button onClick={(e) => { signin(e) }}>
