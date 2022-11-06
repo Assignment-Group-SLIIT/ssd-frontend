@@ -1,26 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react'
 import { createMessage } from '../services/message.service';
 import toastNotification from "../components/toastNotification"
-import { useEffect } from 'react';
 
 const CreateMessage = () => {
+    const [msg, setMsg] = useState({ value: "", error: "This field cannot be empty", isError: false });
 
-    const [email, setEmail] = useState("");
-    const [description, setDescription] = useState("");
-
-    useEffect(() => {
-        //console.log("sessionStorage " , sessionStorage.user);
-        //console.log("sessionStorage " , email);
-    })
 
     const sendMessage = (e) => {
         e.preventDefault();
 
         const user = JSON.parse(sessionStorage.getItem("user"))
-
+        console.log("email>>", user)
         const payload = {
             email: user.email,
-            description
+            description: msg.value
         }
 
         createMessage(payload).then((res) => {
@@ -36,6 +29,18 @@ const CreateMessage = () => {
 
     }
 
+
+    const onInputChange = e => {
+        const { value } = e.target;
+        const re = /^[A-Z@.a-z0-9]+$/;
+        if (value === "" || re.test(value)) {
+            setMsg({ ...msg, value: value })
+        }
+    }
+    useEffect(() => {
+        msg.value === "" ? setMsg({ ...msg, isError: true }) : setMsg({ ...msg, isError: false });
+    }, [msg.value])
+
     return (
         <div>
             <div className='login-body'>
@@ -45,10 +50,9 @@ const CreateMessage = () => {
                         <div class="row">
                             <label>Message</label>
                             <textarea
-                                class="form-control"
-                                onChange={e => { setDescription(e.target.value); }}
-                                id="exampleFormControlTextarea1"
-                                rows="7"></textarea>
+                                value={msg.value}
+                                onChange={onInputChange}
+                                class="form-control" id="exampleFormControlTextarea1" rows="7"></textarea>
                         </div>
 
                         <div id="button" class="row">
