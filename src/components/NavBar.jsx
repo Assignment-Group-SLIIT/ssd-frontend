@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
+import { removeUserSession } from '../utils/token'
 
 const NavigationBar = () => {
+    let navigate = useNavigate();
     const location = useLocation();
     const [userType, setUserType] = useState("");
 
@@ -9,6 +11,11 @@ const NavigationBar = () => {
         const user = JSON.parse(sessionStorage.getItem("user"));
         setUserType(user?.type.toLowerCase());
     }, [])
+
+    const logout = () => {
+        removeUserSession();
+        navigate('/login')
+    }
 
     return (
         <div>
@@ -19,10 +26,10 @@ const NavigationBar = () => {
                 </button>
                 <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        {userType === "admin" ? (<Link to="/register"><a class="nav-item nav-link active" href="#">User Registartion<span class="sr-only">(current)</span></a></Link>) : null}
-                        {userType === "manager" ? (<Link to=""><a class="nav-item nav-link active" href="#">File Upload</a></Link>) : null}
-                        {userType === "manager" || userType === "worker" ? (<Link to="/message"><a class="nav-item nav-link active" href="#">Save Message</a></Link>) : null}
-                        {!location.pathname.toLowerCase().includes("login") ? (<a class="nav-item nav-link active" href="#">Logout</a>) : null}
+                        {userType === "admin" ? (<Link to="/register"><span class="nav-item nav-link active">User Registartion<span class="sr-only">(current)</span></span></Link>) : null}
+                        {userType === "manager" ? (<Link to=""><span class="nav-item nav-link active" >File Upload</span></Link>) : null}
+                        {userType === "manager" || userType === "worker" ? (<Link to="/message"><span class="nav-item nav-link active" >Save Message</span></Link>) : null}
+                        {!location.pathname.toLowerCase().includes("login") ? (<span class="nav-item nav-link active" onClick={() => logout()}>Logout</span>) : null}
                     </div>
                 </div>
             </nav>
