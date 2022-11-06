@@ -6,11 +6,13 @@ const NavigationBar = () => {
     let navigate = useNavigate();
     const location = useLocation();
     const [userType, setUserType] = useState("");
+    const [isLogin, setIsLogin] = useState(false);
 
     useEffect(() => {
         const user = JSON.parse(sessionStorage.getItem("user"));
         setUserType(user?.type.toLowerCase());
-    }, [])
+        location.pathname.toLowerCase().includes("login") ? setIsLogin(true) : setIsLogin(false);
+    }, [location])
 
     const logout = () => {
         removeUserSession();
@@ -29,7 +31,7 @@ const NavigationBar = () => {
                         {userType === "admin" ? (<Link to="/register"><span class="nav-item nav-link active">User Registartion<span class="sr-only">(current)</span></span></Link>) : null}
                         {userType === "manager" ? (<Link to=""><span class="nav-item nav-link active" >File Upload</span></Link>) : null}
                         {userType === "manager" || userType === "worker" ? (<Link to="/message"><span class="nav-item nav-link active" >Save Message</span></Link>) : null}
-                        {!location.pathname.toLowerCase().includes("login") ? (<span class="nav-item nav-link active" onClick={() => logout()}>Logout</span>) : null}
+                        {!isLogin ? (<a class="nav-item nav-link active" onClick={() => logout()}>Logout</a>) : null}
                     </div>
                 </div>
             </nav>
