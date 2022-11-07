@@ -3,12 +3,19 @@ import { loginUser } from '../services/user.service';
 import { useNavigate } from 'react-router-dom';
 import toastNotification from "../components/toastNotification"
 
+
 export const Login = () => {
 
     const navigate = useNavigate();
 
+
+    const login_valid_count = 5;
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    let [isDisabledLogin, setDisabledLogin] = useState(false);
+    let [login_count, setLoginCount] = useState(0);
 
     //login method
     const signin = (e) => {
@@ -19,20 +26,43 @@ export const Login = () => {
             password
         }
 
+        const checkingLogin = async () => {
+
+            toastNotification("Email or Password is incorrect!", "error")
+            login_count = login_count + 1;
+            setLoginCount(login_count);
+            console.log("loffff", login_count, login_valid_count)
+            if (login_count == login_valid_count) {
+                setDisabledLogin(true)
+                await setTimeout(enbelingbtn(), 500000);
+            }
+
+        }
+
+        const enbelingbtn = () => {
+            setDisabledLogin(false);
+            setLoginCount(0);
+        }
+
         loginUser(payload).then((res) => {
             console.log("response", res)
-            res.ok ? toastNotification("Success!", "success") : toastNotification("Email or Password is incorrect!", "error")
+            if (res.ok) {
+                toastNotification("Success!", "success");
 
-            const user = JSON.parse(sessionStorage.getItem("user"))
-            if (user.type === "Worker") {
-                sessionStorage.setItem("type", "Worker")
-                navigate("/message");
-            } else if (user.type === "Admin") {
-                sessionStorage.setItem("type", "Admin")
-                navigate("/register");
+                const user = JSON.parse(sessionStorage.getItem("user"))
+                if (user.type === "Worker") {
+                    sessionStorage.setItem("type", "Worker")
+                    navigate("/message");
+                } else if (user.type === "Admin") {
+                    sessionStorage.setItem("type", "Admin")
+                    navigate("/register");
+                } else {
+                    sessionStorage.setItem("type", "Manager")
+                }
             } else {
-                sessionStorage.setItem("type", "Manager")
+                checkingLogin()
             }
+
         }).catch((err) => {
             console.log("error while sign in >>", err.ok)
 
@@ -61,7 +91,11 @@ export const Login = () => {
                         />
                     </div>
                     <div id="button" class="row">
-                        <button onClick={(e) => { signin(e) }}>
+                        {console.log("is>>>", isDisabledLogin)}
+                        <button
+                            className={isDisabledLogin ? 'buttonDisabled' : 'buttonEnabled'}
+                            disabled={isDisabledLogin ? true : false}
+                            onClick={(e) => { signin(e) }}>
                             Signin
                         </button>
                     </div>
