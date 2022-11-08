@@ -11,3 +11,47 @@
 .btn-upload {
     background-color: aqua !important;
 }
+
+
+.buttonDisaaled {
+    border-radius: 25px;
+    width: 80%;
+    height: 40px;
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 700;
+    background: rgb(68, 70, 70);
+    background: linear-gradient(90deg, rgb(125, 149, 149) 0%, rgb(176, 191, 215) 100%);
+    border: 0px;
+    cursor: pointer;
+    transition: opacity 0.25s ease-out;
+}
+
+.buttonDisaaled:hover {
+    opacity: 0.8;
+}
+
+
+.buttonEnabled {
+    border-radius: 25px;
+    width: 80%;
+    height: 40px;
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 700;
+    background: rgb(34, 193, 195);
+    background: linear-gradient(90deg, rgba(34, 193, 195, 1) 0%, rgb(0, 98, 255) 100%);
+    border: 0px;
+    cursor: pointer;
+    transition: opacity 0.25s ease-out;
+}
+
+.buttonEnabled:hover {
+    opacity: 0.8;
+}
+
+
+
+#button {
+    padding-bottom: 1.5rem;
+}

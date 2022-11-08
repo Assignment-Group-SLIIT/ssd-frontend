@@ -56,7 +56,9 @@ const CreateMessage = () => {
                         </div>
 
                         <div id="button" class="row">
-                            <button onClick={(e) => { sendMessage(e) }}>
+                            <button
+                                className='buttonEnabled'
+                                onClick={(e) => { sendMessage(e) }}>
                                 Submit
                             </button>
                         </div>

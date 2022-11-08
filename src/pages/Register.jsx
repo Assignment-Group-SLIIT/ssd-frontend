@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { registerUser } from '../services/user.service';
+import ReCAPTCHA from "react-google-recaptcha";
+import globals from '../config/globals';
 
 const Register = () => {
+
+    const googleRecaptchaSiteKey = globals.RECAPTCHA_SITE_KEY;
 
     const [name, setName] = useState({ value: "", error: "This field cannot be empty", isError: false });
     const [phone, setPhone] = useState({ value: "", error: "This field cannot be empty", isError: false });
@@ -9,10 +13,13 @@ const Register = () => {
     const [password, setPassword] = useState({ value: "", error: "This field cannot be empty", isError: false });
     const [confirmPassword, setConfirmPassword] = useState({ value: "", error: "This field cannot be empty", isError: false });
     const [type, setType] = useState("");
+    let [isAcknowledgeConfirmed, setAcknowledgeConfirmed] = useState(false);
 
 
     //to validate the user input
     const onInputChange = e => {
+
+
         const { value } = e.target;
         const re = /^[A-Z@.a-z0-9]+$/;
 
@@ -54,6 +61,16 @@ const Register = () => {
         } else {
             alert("password not matching");
         }
+    }
+
+    const changeAcknowledgeState = (value) => {
+        if (value) {
+
+            setAcknowledgeConfirmed(true);
+        } else {
+            setAcknowledgeConfirmed(false);
+        }
+
     }
 
     useEffect(() => {
@@ -133,8 +150,19 @@ const Register = () => {
                                 placeholder="Confirm your password"
                             />
                         </div>
+                        <div className="mt-5 pl-5">
+                            <ReCAPTCHA
+                                sitekey={googleRecaptchaSiteKey}
+                                onChange={changeAcknowledgeState}
+                            />,
+                        </div>
                         <div id="button" class="row">
-                            <button onClick={(e) => { signup(e) }}>
+                            <button
+                                className={isAcknowledgeConfirmed === false ? 'buttonDisaaled' : 'buttonEnabled'}
+                                disabled={
+                                    (isAcknowledgeConfirmed === false) ? true : false
+                                }
+                                onClick={(e) => { signup(e) }}>
                                 Signup
                             </button>
                         </div>
