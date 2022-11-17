@@ -5,43 +5,47 @@ import { toast } from 'react-toastify';
 const toastNotification = (message, status) => {
     if (status === "success") {
         toast.success(message, {
-            position: "top-right",
+            position: "bottom-right",
             autoClose: 4000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
+            theme: "dark",
         });
     } else if (status === "error") {
         toast.error(message, {
-            position: "top-right",
+            position: "bottom-right",
             autoClose: 4000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
+            theme: "dark",
         });
     } else if (status === "warn") {
         toast.warning(message, {
-            position: "top-right",
+            position: "bottom-right",
             autoClose: 4000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
+            theme: "dark",
         });
     } else {
         toast.info(message, {
-            position: "top-right",
+            position: "bottom-right",
             autoClose: 4000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
+            theme: "dark",
         });
     }
 };

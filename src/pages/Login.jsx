@@ -3,7 +3,6 @@ import { loginUser } from '../services/user.service';
 import { useNavigate } from 'react-router-dom';
 import toastNotification from '../components/toastNotification';
 
-
 export const Login = () => {
 
     const navigate = useNavigate();
@@ -29,7 +28,7 @@ export const Login = () => {
             password
         }
 
-        const checkingLogin = async () => {  
+        const checkingLogin = async () => {
             login_count = login_count + 1;
             setLoginCount(login_count);
             if (login_count === login_valid_count) {    
