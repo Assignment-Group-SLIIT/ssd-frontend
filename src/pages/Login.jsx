@@ -49,12 +49,16 @@ export const Login = () => {
                 const user = JSON.parse(sessionStorage.getItem("user"))
                 if (user.type === "Worker") {
                     sessionStorage.setItem("type", "Worker")
+                    toastNotification("Login as a Worker!", "success");
                     navigate("/message");
                 } else if (user.type === "Admin") {
                     sessionStorage.setItem("type", "Admin")
+                    toastNotification("Login as a Admin!", "success");
                     navigate("/register");
                 } else {
                     sessionStorage.setItem("type", "Manager")
+                    toastNotification("Login as a Manager!", "success");
+                    navigate("/file");
                 }
             } else if(res.ok === false){
                 toastNotification("Email or Password is incorrect!", "error")
