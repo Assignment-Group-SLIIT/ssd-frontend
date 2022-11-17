@@ -10,14 +10,14 @@ const CreateMessage = () => {
         e.preventDefault();
 
         const user = JSON.parse(sessionStorage.getItem("user"))
-        console.log("email>>", user)
+        // console.log("email>>", user)
         const payload = {
             email: user.email,
             description: msg.value
         }
 
         createMessage(payload).then((res) => {
-            console.log("response", res)
+            // console.log("response", res)
             res.ok ? toastNotification("Success!", "success") : toastNotification("Email or Message is incorrect!", "error")
 
 

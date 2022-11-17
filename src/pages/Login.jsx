@@ -28,7 +28,7 @@ export const Login = () => {
         const checkingLogin = async () => {
             login_count = login_count + 1;
             setLoginCount(login_count);
-            console.log("loffff", login_count, login_valid_count)
+            // console.log("loffff", login_count, login_valid_count)
             if (login_count === login_valid_count) {
                 setDisabledLogin(true)
             }
@@ -41,7 +41,7 @@ export const Login = () => {
         }
 
         loginUser(payload).then((res) => {
-            console.log("response", res)
+            // console.log("response", res)
             if (res.ok) {
                 toastNotification("Success!", "success");
 
@@ -93,7 +93,7 @@ export const Login = () => {
                         />
                     </div>
                     <div id="button" class="row">
-                        {console.log("is>>>", isDisabledLogin)}
+                        {/* {console.log("is>>>", isDisabledLogin)} */}
                         <button
                             className={isDisabledLogin ? 'buttonDisabled' : 'buttonEnabled'}
                             disabled={isDisabledLogin ? true : false}

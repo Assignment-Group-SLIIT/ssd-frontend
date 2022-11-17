@@ -29,7 +29,7 @@ const NavigationBar = () => {
                 <div class="collapse navbar-collapse d-flex flex-row-reverse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
                         {userType === "admin" ? (<Link to="/register"><span class="nav-item nav-link active">User Registartion<span class="sr-only">(current)</span></span></Link>) : null}
-                        {userType === "manager" ? (<Link to=""><span class="nav-item nav-link active" >File Upload</span></Link>) : null}
+                        {userType === "manager" ? (<Link to="/file"><span class="nav-item nav-link active" >File Upload</span></Link>) : null}
                         {userType === "manager" || userType === "worker" ? (<Link to="/message"><span class="nav-item nav-link active" >Save Message</span></Link>) : null}
                         {!isLogin ? (<a class="nav-item nav-link active" onClick={() => logout()}>Logout</a>) : null}
                     </div>
