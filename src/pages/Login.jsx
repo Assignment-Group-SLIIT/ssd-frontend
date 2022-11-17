@@ -11,7 +11,7 @@ export const Login = () => {
 
     const login_valid_count = 5;
 
-    const [email, setEmail] = useState("");
+    const [email, setEmail] = useState({ value: "", error: "This field cannot be empty", isError: false });
     const [password, setPassword] = useState("");
     const [sessionTime, setSessionTime] = useState(sessionStorage.getItem("Invalid Session"))
 
@@ -21,10 +21,32 @@ export const Login = () => {
 
 
     useEffect(() => {
+
+        email.value === "" ? setEmail({ ...email, isError: true }) : setEmail({ ...email, isError: false });
+
         if (sessionTime !== "3600000" || login_count <= login_valid_count) {
             setDisabledLogin(false)
         }
-    }, [])
+    }, [email.value])
+
+
+    //to validate the user input
+    const onInputChange = e => {
+
+        console.log("ee>>", e.target)
+
+        const { value } = e.target;
+        const re = /^[A-Z@.a-z0-9]+$/;
+
+
+        if (value === "" || re.test(value)) {
+
+            if (e.target.id == "email") {
+                setEmail({ ...email, value: value })
+            }
+        }
+
+    }
 
 
     //login method
@@ -32,8 +54,8 @@ export const Login = () => {
         e.preventDefault();
 
         const payload = {
-            email,
-            password
+            email: email.value,
+            password: password
         }
 
         const checkingLogin = async () => {
@@ -87,14 +109,18 @@ export const Login = () => {
                     <div class="row">
                         <label>Email</label>
                         <input
+                            id="email"
                             type="text"
+                            value={email.value}
                             placeholder="Enter your email"
-                            onChange={e => { setEmail(e.target.value); }}
+                            // onChange={e => { setEmail(e.target.value); }}
+                            onChange={onInputChange}
                         />
                     </div>
                     <div class="row">
                         <label>Password</label>
                         <input
+                            id="password"
                             type="password"
                             placeholder="Enter your password"
                             onChange={e => { setPassword(e.target.value); }}
