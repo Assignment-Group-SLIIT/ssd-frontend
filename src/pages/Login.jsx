@@ -58,6 +58,7 @@ export const Login = () => {
                     navigate("/register");
                 } else {
                     sessionStorage.setItem("type", "Manager")
+                    navigate("/file");
                 }
             } else {
                 checkingLogin()
