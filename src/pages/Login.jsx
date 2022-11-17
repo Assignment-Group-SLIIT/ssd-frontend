@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { loginUser } from '../services/user.service';
 import { useNavigate } from 'react-router-dom';
-import toastNotification from "../components/toastNotification"
+import toastNotification from '../components/toastNotification';
 
 
 export const Login = () => {
@@ -13,9 +13,12 @@ export const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [sessionTime,setSessionTime]=useState("")
+    
 
     let [isDisabledLogin, setDisabledLogin] = useState(false);
     let [login_count, setLoginCount] = useState(0);
+    
 
     //login method
     const signin = (e) => {
@@ -29,9 +32,10 @@ export const Login = () => {
         const checkingLogin = async () => {  
             login_count = login_count + 1;
             setLoginCount(login_count);
-            console.log("loffff", login_count, login_valid_count)
-            if (login_count === login_valid_count) {
+            if (login_count === login_valid_count) {    
                 setDisabledLogin(true)
+                console.log(parseInt(sessionTime))
+                setTimeout(()=>{enablingBtn()},parseInt(sessionTime))
             }
 
         }
@@ -42,10 +46,8 @@ export const Login = () => {
         }
 
         loginUser(payload).then((res) => {
-            console.log("response", res)
             if (res.ok) {
                 toastNotification("Success!", "success");
-
                 const user = JSON.parse(sessionStorage.getItem("user"))
                 if (user.type === "Worker") {
                     sessionStorage.setItem("type", "Worker")
@@ -61,8 +63,10 @@ export const Login = () => {
                     navigate("/file");
                 }
             } else if(res.ok === false){
-                toastNotification("Email or Password is incorrect!", "error")
+                sessionStorage.setItem("Invalid Session", "3600000")
+                setSessionTime(sessionStorage.getItem("Invalid Session"))
                 checkingLogin()
+                alert("Email or Password is incorrect!", "error")
             }
 
         }).catch((err) => {
