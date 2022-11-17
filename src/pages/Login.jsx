@@ -26,17 +26,20 @@ export const Login = () => {
             password
         }
 
-        const checkingLogin = async () => {  
+        const checkingLogin = async () => {
+
+            toastNotification("Email or Password is incorrect!", "error")
             login_count = login_count + 1;
             setLoginCount(login_count);
             console.log("loffff", login_count, login_valid_count)
-            if (login_count === login_valid_count) {
+            if (login_count == login_valid_count) {
                 setDisabledLogin(true)
+                await setTimeout(enbelingbtn(), 500000);
             }
 
         }
 
-        const enablingBtn = () => {
+        const enbelingbtn = () => {
             setDisabledLogin(false);
             setLoginCount(0);
         }
@@ -56,8 +59,7 @@ export const Login = () => {
                 } else {
                     sessionStorage.setItem("type", "Manager")
                 }
-            } else if(res.ok === false){
-                toastNotification("Email or Password is incorrect!", "error")
+            } else {
                 checkingLogin()
             }
 

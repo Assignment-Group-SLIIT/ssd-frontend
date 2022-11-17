@@ -40,6 +40,25 @@ const Register = () => {
         }
     }
 
+    // const onInputPasswordValidation = (e) => {
+    //     const { value } = e.target;
+
+    //     let charLength = value.trim().length
+
+    //     if (charLength < 9) {
+    //         if (e.target.id == "password") {
+    //             setPassword({ ...password, value: value })
+    //         }
+    //         if (e.target.id == "confirmPassword") {
+    //             setPassword({ ...confirmPassword, value: value })
+    //         }
+    //     }
+
+
+
+    //     console.log(">>>>>", charLength)
+    // }
+
     //login method
     const signup = (e) => {
         e.preventDefault();
@@ -113,6 +132,8 @@ const Register = () => {
                                 placeholder="Enter your email"
                                 onChange={onInputChange}
                             />
+                            {/* {console.log(email)} */}
+                            {email.isError && <small className='text-danger'>{email.error}</small>}
                         </div>
                         <div class="row">
                             <label>Phone Number</label>
@@ -123,6 +144,8 @@ const Register = () => {
                                 placeholder="Enter your phone number"
                                 onChange={onInputChange}
                             />
+                            {phone.isError && <small className='text-danger'>{phone.error}</small>}
+
                         </div>
                         <div class="row">
                             <label>User Type</label>
@@ -142,8 +165,13 @@ const Register = () => {
                                 id="password"
                                 type="password"
                                 placeholder="Enter your password"
+                                maxlength="12"
+                                minlength="8"
                                 onChange={(e) => setPassword(e.target.value)}
+                            // onChange={onInputPasswordValidation}
                             />
+                            {password.isError && <small className='text-danger'>{password.error}</small>}
+
                         </div>
                         <div class="row">
                             <label>Confirm Password</label>
@@ -151,8 +179,12 @@ const Register = () => {
                                 id="confirmPassword"
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 type="password"
+                                maxlength="12"
+                                minlength="8"
                                 placeholder="Confirm your password"
                             />
+                            {confirmPassword.isError && <small className='text-danger'>{confirmPassword.error}</small>}
+
                         </div>
                         <div className="mt-5 pl-5">
                             <ReCAPTCHA
@@ -162,7 +194,7 @@ const Register = () => {
                         </div>
                         <div id="button" class="row">
                             <button
-                                className={isAcknowledgeConfirmed === false ? 'buttonDisaaled' : 'buttonEnabled'}
+                                className={isAcknowledgeConfirmed === false ? 'buttonDisabled' : 'buttonEnabled'}
                                 disabled={
                                     (isAcknowledgeConfirmed === false) ? true : false
                                 }
