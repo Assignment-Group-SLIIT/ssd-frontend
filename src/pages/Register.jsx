@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { registerUser } from '../services/user.service';
 import ReCAPTCHA from "react-google-recaptcha";
 import globals from '../config/globals';
+import toastNotification from "../components/toastNotification"
 
 const Register = () => {
 
@@ -58,7 +59,7 @@ const Register = () => {
             }).catch((err) => {
                 console.log("error while staff signup", err.error)
                 //alert("somthing went wrong !!!!");
-                err.ok === false ? toastNotification("Error occured!", "error") : null
+                toastNotification("Error occured!", "error");
             })
         } else {
             //alert("password not matching");
