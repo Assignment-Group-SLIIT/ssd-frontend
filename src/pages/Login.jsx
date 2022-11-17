@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { loginUser } from '../services/user.service';
 import { useNavigate } from 'react-router-dom';
 import toastNotification from '../components/toastNotification';
+import { useEffect } from 'react';
 
 export const Login = () => {
 
@@ -12,11 +13,18 @@ export const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [sessionTime,setSessionTime]=useState("")
+    const [sessionTime,setSessionTime]=useState(sessionStorage.getItem("Invalid Session"))
     
 
-    let [isDisabledLogin, setDisabledLogin] = useState(false);
+    let [isDisabledLogin, setDisabledLogin] = useState(true);
     let [login_count, setLoginCount] = useState(0);
+
+
+    useEffect(()=>{
+        if(sessionTime  !== "3600000"){
+            setDisabledLogin(false)
+        }
+    },[])
     
 
     //login method
@@ -65,7 +73,7 @@ export const Login = () => {
                 sessionStorage.setItem("Invalid Session", "3600000")
                 setSessionTime(sessionStorage.getItem("Invalid Session"))
                 checkingLogin()
-                alert("Email or Password is incorrect!", "error")
+                toastNotification("Email or Password is incorrect!", "error")
             }
 
         }).catch((err) => {
