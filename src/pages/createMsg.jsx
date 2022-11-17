@@ -21,7 +21,7 @@ const CreateMessage = () => {
 
         const payload = {
             email:user.email,
-            description
+            description,
         }
 
         createMessage(payload).then((res) => {
