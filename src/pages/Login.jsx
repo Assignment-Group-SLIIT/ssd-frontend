@@ -22,11 +22,14 @@ export const Login = () => {
 
     useEffect(() => {
 
-        email.value === "" ? setEmail({ ...email, isError: true }) : setEmail({ ...email, isError: false });
-
-        if (sessionTime !== "3600000" || login_count <= login_valid_count) {
+        if (sessionTime !== "3600000" && login_count <= login_valid_count) {
             setDisabledLogin(false)
         }
+    }, [])
+
+
+    useEffect(() => {
+        email.value === "" ? setEmail({ ...email, isError: true }) : setEmail({ ...email, isError: false });
     }, [email.value])
 
 
