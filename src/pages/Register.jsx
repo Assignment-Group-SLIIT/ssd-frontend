@@ -51,15 +51,18 @@ const Register = () => {
         }
         if (password === confirmPassword) {
             registerUser(userPayload).then((response) => {
-                alert("success")
+                //alert("success")
+                toastNotification("Success!", "success");
                 window.location.reload();
 
             }).catch((err) => {
                 console.log("error while staff signup", err.error)
-                alert("somthing went wrong !!!!");
+                //alert("somthing went wrong !!!!");
+                err.ok === false ? toastNotification("Error occured!", "error") : null
             })
         } else {
-            alert("password not matching");
+            //alert("password not matching");
+            toastNotification("Error occured!", "error");
         }
     }
 

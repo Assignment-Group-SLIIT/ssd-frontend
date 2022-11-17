@@ -23,6 +23,7 @@ const CreateMessage = () => {
 
 
         }).catch((err) => {
+            err.ok === false ? toastNotification("Error occured!", "error") : null
             console.log("error while sign in >>", err.ok)
 
         })
