@@ -25,6 +25,7 @@ const Register = () => {
         const re = /^[A-Z@.a-z0-9]+$/;
 
 
+
         if (value === "" || re.test(value)) {
 
             if (e.target.id == "userName") {
@@ -33,9 +34,14 @@ const Register = () => {
             if (e.target.id == "email") {
                 setEmail({ ...email, value: value })
             }
-            if (e.target.id == "phoneNumber") {
-                setPhone({ ...phone, value: value })
-            }
+            // if (e.target.id == "phoneNumber") {
+            //     if (number.test(value)) {
+            //         setPhone({ ...phone, value: value })
+            //     }
+
+            // }
+
+
 
         }
     }
@@ -69,11 +75,18 @@ const Register = () => {
             password: password,
             type: type
         }
+        console.log("payload>>", userPayload)
         if (password === confirmPassword) {
             registerUser(userPayload).then((response) => {
+                console.log("res>>>>", response)
                 //alert("success")
-                toastNotification("Success!", "success");
-                window.location.reload();
+
+                // window.location.reload();
+                if (response.ok == false) {
+                    toastNotification("Error occured!", "error");
+                } else {
+                    toastNotification("Success!", "success");
+                }
 
             }).catch((err) => {
                 console.log("error while staff signup", err.error)
@@ -141,8 +154,10 @@ const Register = () => {
                                 type="number"
                                 id="phoneNumber"
                                 value={phone.value}
+                                maxLength={10}
+                                pattern="^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$"
                                 placeholder="Enter your phone number"
-                                onChange={onInputChange}
+                                onChange={(e) => setPhone({ ...phone, value: e.target.value })}
                             />
                             {phone.isError && <small className='text-danger'>{phone.error}</small>}
 

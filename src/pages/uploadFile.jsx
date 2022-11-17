@@ -75,8 +75,8 @@ export const UploadFile = () => {
                 </br>
 
                 <div className="col py-3 text-center">
-                    <div id="button" class="row">
-                        <button onClick={(e) => { onSubmit(e) }}>
+                    <div id="button" class="row ">
+                        <button className='buttonEnabled' onClick={(e) => { onSubmit(e) }}>
                             Upload
                         </button>
                     </div>

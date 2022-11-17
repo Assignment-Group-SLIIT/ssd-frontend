@@ -33,8 +33,9 @@ const CreateMessage = () => {
 
     const onInputChange = e => {
         const { value } = e.target;
-        const re = /^[A-Z@.a-z0-9]+$/;
-        if (value === "" || re.test(value)) {
+        const re = /^[A-Z @.a-z0-9]+$/;
+        console.log("re>>", re.test(value))
+        if (value === " " || re.test(value)) {
             setMsg({ ...msg, value: value })
         }
     }
