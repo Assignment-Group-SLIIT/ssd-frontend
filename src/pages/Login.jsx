@@ -61,6 +61,7 @@ export const Login = () => {
                 } else {
                     sessionStorage.setItem("type", "Manager")
                     toastNotification("Login as a Manager!", "success");
+                    navigate("/file");
                 }
             } else {
                 checkingLogin()
