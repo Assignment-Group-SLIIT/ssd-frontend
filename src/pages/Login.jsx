@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { loginUser } from '../services/user.service';
 import { useNavigate } from 'react-router-dom';
-import toastNotification from "../components/toastNotification"
-
+import toastNotification from '../components/toastNotification';
+import { useEffect } from 'react';
 
 export const Login = () => {
 
@@ -13,9 +13,19 @@ export const Login = () => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [sessionTime, setSessionTime] = useState(sessionStorage.getItem("Invalid Session"))
 
-    let [isDisabledLogin, setDisabledLogin] = useState(false);
+
+    let [isDisabledLogin, setDisabledLogin] = useState(true);
     let [login_count, setLoginCount] = useState(0);
+
+
+    useEffect(() => {
+        if (sessionTime !== "3600000") {
+            setDisabledLogin(false)
+        }
+    }, [])
+
 
     //login method
     const signin = (e) => {
@@ -27,14 +37,12 @@ export const Login = () => {
         }
 
         const checkingLogin = async () => {
-
-            toastNotification("Email or Password is incorrect!", "error")
             login_count = login_count + 1;
             setLoginCount(login_count);
-            console.log("loffff", login_count, login_valid_count)
-            if (login_count == login_valid_count) {
+            if (login_count === login_valid_count) {
                 setDisabledLogin(true)
-                await setTimeout(enbelingbtn(), 500000);
+                console.log(parseInt(sessionTime))
+                setTimeout(() => { enablingBtn() }, parseInt(sessionTime))
             }
 
         }
@@ -45,10 +53,8 @@ export const Login = () => {
         }
 
         loginUser(payload).then((res) => {
-            console.log("response", res)
             if (res.ok) {
                 toastNotification("Success!", "success");
-
                 const user = JSON.parse(sessionStorage.getItem("user"))
                 if (user.type === "Worker") {
                     sessionStorage.setItem("type", "Worker")
@@ -59,8 +65,11 @@ export const Login = () => {
                 } else {
                     sessionStorage.setItem("type", "Manager")
                 }
-            } else {
+            } else if (res.ok === false) {
+                sessionStorage.setItem("Invalid Session", "3600000")
+                setSessionTime(sessionStorage.getItem("Invalid Session"))
                 checkingLogin()
+                toastNotification("Email or Password is incorrect!", "error")
             }
 
         }).catch((err) => {
