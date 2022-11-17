@@ -89,6 +89,7 @@ export const Login = () => {
                     navigate("/register");
                 } else {
                     sessionStorage.setItem("type", "Manager")
+                    navigate("/file");
                 }
             } else if (res.ok === false) {
                 sessionStorage.setItem("Invalid Session", "3600000")
