@@ -82,7 +82,7 @@ const Register = () => {
             })
         } else {
             //alert("password not matching");
-            toastNotification("Error occured!", "error");
+            toastNotification("Please check your passwords again!", "error");
         }
     }
 

@@ -21,7 +21,7 @@ export const Login = () => {
 
 
     useEffect(() => {
-        if (sessionTime !== "3600000") {
+        if (sessionTime !== "3600000" || login_count <= login_valid_count) {
             setDisabledLogin(false)
         }
     }, [])
@@ -47,7 +47,7 @@ export const Login = () => {
 
         }
 
-        const enbelingbtn = () => {
+        const enablingBtn = () => {
             setDisabledLogin(false);
             setLoginCount(0);
         }
@@ -56,6 +56,7 @@ export const Login = () => {
             if (res.ok) {
                 toastNotification("Success!", "success");
                 const user = JSON.parse(sessionStorage.getItem("user"))
+                sessionStorage.removeItem("Invalid Session")
                 if (user.type === "Worker") {
                     sessionStorage.setItem("type", "Worker")
                     navigate("/message");
